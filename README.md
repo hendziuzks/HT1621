@@ -18,6 +18,10 @@ Product information:
 
 
 <p align="center">
+  <br>
+  <b>TEST Segments</b><br>
+  <img src="https://github.com/kr4fty/HT1621/blob/master/hardware/testSegments.gif">
+  <br> 
   <br><br>
   <b>Front</b><br>
   <img src="https://github.com/kr4fty/HT1621/blob/master/hardware/front.jpg">
@@ -25,8 +29,4 @@ Product information:
   <b>Back</b><br>
   <img src="https://github.com/kr4fty/HT1621/blob/master/hardware/back.jpg">
   <br>
-  <br>
-  <b>TEST Segments</b><br>
-  <img src="https://github.com/kr4fty/HT1621/blob/master/hardware/testSegments.gif">
-  <br> 
 </p>
