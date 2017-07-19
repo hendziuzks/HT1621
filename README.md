@@ -5,3 +5,28 @@ Mostly from: macduino.blogspot.com, thanks!
 modified to add print like statments for easy digit display
 
 purchased from ebay: http://www.ebay.ca/itm/Arduino-example-12Digit-7Seg-SPI-LCD-LED-UNO-MEGA2560-AVR-PIC-ARM-CPLD-/281152682213?hash=item41760178e5 
+
+## Update for Kr4fty
+
+This is the implementation of the library to a display taken from an audio equipment of Chinese origin.
+
+Product information:
+
+    * Brand: Premier
+    * Model: SX-002DVD
+    * Features: AM/FM STEREO RADIO CASSETTE RECORDER WITH DVD/VCD/MP3/CD PLAYER
+
+
+<p align="center">
+  <br><br>
+  <b>Front</b><br>
+  <img src="https://github.com/kr4fty/HT1621/blob/master/hardware/front.jpg">
+  <br>
+  <b>Back</b><br>
+  <img src="https://github.com/kr4fty/HT1621/blob/master/hardware/back.jpg">
+  <br>
+  <br>
+  <b>TEST Segments</b><br>
+  <img src="https://github.com/kr4fty/HT1621/blob/master/hardware/testSegments.gif">
+  <br> 
+</p>
