@@ -30,3 +30,13 @@ Product information:
   <img src="https://github.com/kr4fty/HT1621/blob/master/hardware/back.jpg">
   <br>
 </p>
+
+
+### Video
+
+<p align="center">
+  <b>YouTube</b><br>
+  <a href="https://www.youtube.com/watch?v=gAYrgrl24hk">
+  <img src="https://img.youtube.com/vi/gAYrgrl24hk/0.jpg)">
+  </a>
+</p>

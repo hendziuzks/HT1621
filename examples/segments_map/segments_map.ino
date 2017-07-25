@@ -1,7 +1,7 @@
 #include <HT1621.h>
 #include "segments.h"
 
-#define DELAY 100
+#define DELAY 150
 
 uint8_t drawing_segments[] = {
   SEG_TWO_POINTS_1, SEG_PADLOCK, SEG_MICROPHONES, 
@@ -57,6 +57,16 @@ uint8_t d7 [] = {
 };
 uint8_t d8 [] = {
   D8A, D8B, D8C, D8D, D8E, D8F, D8G
+};
+uint8_t demo[] = {
+  D0C, 
+  D0D, D1D, D2D, D3D, D4D, D5D, D6D, D7D, D8D,
+  D8E, 
+  D8G, D7G, D6G, D5G, D4G, D3G, D2G, D1G, D0G,
+  D0B,
+  D0A, D1A, D2A, D3A, D4A, D5A, D6A, D7A, D8A,
+  D8F,
+  D8C, D8B, D7F, D7E, D7C, D7B, D6F, D6E, D6C, D6B, D5F, D5E, D5C, D5B, D4F, D4E, D4C, D4B, D3F, D3E, D3C, D3B, D2F, D2E, D2C, D2B, D1F, D1E, D1C, D1B, D0F, D0E
 };
 
 HT1621 ht(9,8,7); // STRB, CLK, DATA
@@ -174,4 +184,16 @@ void loop()
     delay(DELAY);
     clearDisplay();
   }
+  
+
+  for(int i=0, j=0; i<sizeof(demo); i++){
+    ht.write(demo[i]/8, ht.read(demo[i]/8)|1<<(demo[i]%8));
+    delay(DELAY);
+    //clearDisplay(demo[i]/8,demo[i]/8 +1);
+  }
+  for(int i=0, j=0; i<sizeof(demo); i++){
+    ht.write(demo[i]/8, ht.read(demo[i]/8)&(~(1<<(demo[i]%8))) );
+    delay(DELAY);
+  }
+  delay(DELAY);
 }
