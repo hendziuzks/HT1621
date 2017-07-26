@@ -125,7 +125,7 @@ void loop()
    */
   for(int i=0; i<sizeof(drawing_segments); i++){
     ht.write(drawing_segments[i]/8, ht.read(drawing_segments[i]/8)|1<<(drawing_segments[i]%8));
-    delay(DELAY);
+    delay(4*DELAY);
   }
   clearDisplay();
 
@@ -203,10 +203,12 @@ void loop()
   }
   clearDisplay();
 
+  /*
+   * Demo
+   */
   for(int i=0, j=0; i<sizeof(demo); i++){
     ht.write(demo[i]/8, ht.read(demo[i]/8)|1<<(demo[i]%8));
     delay(DELAY);
-    //clearDisplay(demo[i]/8,demo[i]/8 +1);
   }
   for(int i=0, j=0; i<sizeof(demo); i++){
     ht.write(demo[i]/8, ht.read(demo[i]/8)&(~(1<<(demo[i]%8))) );
@@ -215,6 +217,9 @@ void loop()
   delay(DELAY);
   clearDisplay();
   
+  /*
+   * Numbers
+   */
   for(int i=0; i<16; i++){
     for(int j=0; j<9; j++){
       setNum(j, i);
@@ -224,10 +229,13 @@ void loop()
   delay(DELAY);
   clearDisplay();
   
+  /*
+   * Counter
+   */
   for(int i=-1100; i<1000; i++){
     printNum(i);
     delay(10);
   }
-  delay(DELAY);
+  delay(10*DELAY);
   clearDisplay();
 }

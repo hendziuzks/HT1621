@@ -35,7 +35,11 @@ Product information:
 ### Video
 
 <p align="center">
-  <b>YouTube</b><br>
+  <b>YouTube</b><br><br>
+  <a href="https://www.youtube.com/watch?v=lywbADiDbpE">
+  <img src="https://img.youtube.com/vi/lywbADiDbpE/0.jpg">
+  </a>
+  <br>
   <a href="https://www.youtube.com/watch?v=gAYrgrl24hk">
   <img src="https://img.youtube.com/vi/gAYrgrl24hk/0.jpg">
   </a>
