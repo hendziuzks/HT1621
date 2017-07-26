@@ -3,6 +3,10 @@
 
 #define DELAY 150
 
+int num_char[]={
+  0xF5, 0x05, 0xB6, 0x97, 0x47, 0xD3, 0xF3, 0x85, 0xF7, 0xC7, 0xE7, 0xF7, 0xF0, 0xF5, 0xF2, 0xE2
+};
+int minusOne = 0x02;
 uint8_t drawing_segments[] = {
   SEG_TWO_POINTS_1, SEG_PADLOCK, SEG_MICROPHONES, 
   SEG_DDIGITAL, SEG_PROG, SEG_TOTAL, SEG_MP3, 
@@ -71,10 +75,38 @@ uint8_t demo[] = {
 
 HT1621 ht(9,8,7); // STRB, CLK, DATA
 
+void setNum(int pos, int num){
+  if(num >= 0){
+    ht.write(pos+0, (num_char[num]&0x0F)|(ht.read(pos)&0xF0));
+    ht.write(pos+1, (num_char[num]&0xF0)|(ht.read(pos+1)&0x0F));
+  }
+  else{
+    ht.write(pos+0, (minusOne&0x0F)|(ht.read(pos)&0xF0));
+    ht.write(pos+1, (minusOne&0xF0)|(ht.read(pos+1)&0x0F));
+  }
+}
+void printNum(long num){
+  bool isNegative=false;
+  int i;
+  if(num<0){
+    isNegative = true;
+    num *= -1;
+  }
+  for (i = 0 ; i<=8&&num>0 ; i++) {
+    int adr = i;
+    setNum(adr, num % 10);
+    num /= 10;
+  }
+  if(isNegative){
+    ht.write(i+1, 0x00);
+    setNum(i, -1);
+  }
+}
+
 void clearDisplay()
 {
-  for (int k = 0 ; k < 21 ; k++) {
-    ht.write(k, 0x0);
+  for (int k = 0 ; k < 16 ; k++) {
+    ht.write(k, 0x00);
   }
 }
 
@@ -92,99 +124,84 @@ void loop()
    * Show drawings only
    */
   for(int i=0; i<sizeof(drawing_segments); i++){
-    ht.write(drawing_segments[i]/8, 1<<(drawing_segments[i]%8));
+    ht.write(drawing_segments[i]/8, ht.read(drawing_segments[i]/8)|1<<(drawing_segments[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
+  clearDisplay();
 
   /*
    * Show similar segments
    */
   for(int i=0; i<9; i++){
-    ht.write(As_segments[i]/8, 1<<(As_segments[i]%8));
+    ht.write(As_segments[i]/8, ht.read(As_segments[i]/8)|1<<(As_segments[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<9; i++){
-    ht.write(Bs_segments[i]/8, 1<<(Bs_segments[i]%8));
+    ht.write(Bs_segments[i]/8, ht.read(Bs_segments[i]/8)|1<<(Bs_segments[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<9; i++){
-    ht.write(Cs_segments[i]/8, 1<<(Cs_segments[i]%8));
+    ht.write(Cs_segments[i]/8, ht.read(Cs_segments[i]/8)|1<<(Cs_segments[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<9; i++){
-    ht.write(Ds_segments[i]/8, 1<<(Ds_segments[i]%8));
+    ht.write(Ds_segments[i]/8, ht.read(Ds_segments[i]/8)|1<<(Ds_segments[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<9; i++){
-    ht.write(Es_segments[i]/8, 1<<(Es_segments[i]%8));
+    ht.write(Es_segments[i]/8, ht.read(Es_segments[i]/8)|1<<(Es_segments[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<9; i++){
-    ht.write(Fs_segments[i]/8, 1<<(Fs_segments[i]%8));
+    ht.write(Fs_segments[i]/8, ht.read(Fs_segments[i]/8)|1<<(Fs_segments[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<9; i++){
-    ht.write(Gs_segments[i]/8, 1<<(Gs_segments[i]%8));
+    ht.write(Gs_segments[i]/8, ht.read(Gs_segments[i]/8)|1<<(Gs_segments[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
-  for(int i=0; i<7; i++){
-    ht.write(d0[i]/8, 1<<(d0[i]%8));
-    delay(DELAY);
-    clearDisplay();
-  }
+  clearDisplay();
   
   /*
    * Show, for each digit, the segments one by one
    */
   for(int i=0; i<7; i++){
-    ht.write(d1[i]/8, 1<<(d1[i]%8));
+    ht.write(d0[i]/8, ht.read(d0[i]/8)|1<<(d0[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<7; i++){
-    ht.write(d2[i]/8, 1<<(d2[i]%8));
+    ht.write(d1[i]/8, ht.read(d1[i]/8)|1<<(d1[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<7; i++){
-    ht.write(d3[i]/8, 1<<(d3[i]%8));
+    ht.write(d2[i]/8, ht.read(d2[i]/8)|1<<(d2[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<7; i++){
-    ht.write(d4[i]/8, 1<<(d4[i]%8));
+    ht.write(d3[i]/8, ht.read(d3[i]/8)|1<<(d3[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<7; i++){
-    ht.write(d5[i]/8, 1<<(d5[i]%8));
+    ht.write(d4[i]/8, ht.read(d4[i]/8)|1<<(d4[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<7; i++){
-    ht.write(d6[i]/8, 1<<(d6[i]%8));
+    ht.write(d5[i]/8, ht.read(d5[i]/8)|1<<(d5[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<7; i++){
-    ht.write(d7[i]/8, 1<<(d7[i]%8));
+    ht.write(d6[i]/8, ht.read(d6[i]/8)|1<<(d6[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
   for(int i=0; i<7; i++){
-    ht.write(d8[i]/8, 1<<(d8[i]%8));
+    ht.write(d7[i]/8, ht.read(d7[i]/8)|1<<(d7[i]%8));
     delay(DELAY);
-    clearDisplay();
   }
-  
+  for(int i=0; i<7; i++){
+    ht.write(d8[i]/8, ht.read(d8[i]/8)|1<<(d8[i]%8));
+    delay(DELAY);
+  }
+  clearDisplay();
 
   for(int i=0, j=0; i<sizeof(demo); i++){
     ht.write(demo[i]/8, ht.read(demo[i]/8)|1<<(demo[i]%8));
@@ -196,4 +213,21 @@ void loop()
     delay(DELAY);
   }
   delay(DELAY);
+  clearDisplay();
+  
+  for(int i=0; i<16; i++){
+    for(int j=0; j<9; j++){
+      setNum(j, i);
+      delay(DELAY);
+    }
+  }
+  delay(DELAY);
+  clearDisplay();
+  
+  for(int i=-1100; i<1000; i++){
+    printNum(i);
+    delay(10);
+  }
+  delay(DELAY);
+  clearDisplay();
 }

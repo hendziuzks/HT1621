@@ -37,6 +37,6 @@ Product information:
 <p align="center">
   <b>YouTube</b><br>
   <a href="https://www.youtube.com/watch?v=gAYrgrl24hk">
-  <img src="https://img.youtube.com/vi/gAYrgrl24hk/0.jpg)">
+  <img src="https://img.youtube.com/vi/gAYrgrl24hk/0.jpg">
   </a>
 </p>
